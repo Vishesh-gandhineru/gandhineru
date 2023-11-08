@@ -5,7 +5,8 @@ const AllowedImageWordpressDomain = new URL(process.env.NEXT_PUBLIC_WORDPRESS_SI
 const nextConfig = {
     images: {
         domains:[AllowedImageWordpressDomain]
-    }
+    },
+    reactStrictMode: false,
 }
 
 module.exports = nextConfig

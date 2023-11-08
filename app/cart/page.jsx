@@ -1,13 +1,17 @@
-import React from 'react'
+
+
+import AddedCartList from "../components/CartComponents/AddedCartList";
+
 
 const CartPage = () => {
+
+
   return (
     <div>
-        <h1>
-        Cart Page
-        </h1>
-        </div>
-  )
-}
+      <h1>Cart Page</h1>
+      <AddedCartList />
+    </div>
+  );
+};
 
-export default CartPage
+export default CartPage;

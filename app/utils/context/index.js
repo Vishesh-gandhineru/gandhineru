@@ -11,7 +11,6 @@ export const AppProvider = (props) => {
 
         let cartData = localStorage.getItem('next-cart')
         cartData = null !== cartData ? JSON.parse(cartData) : "" ;
-        console.log("cartData" , cartData)
         setCart(cartData);
 
     },[])

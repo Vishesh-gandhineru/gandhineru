@@ -32,7 +32,7 @@ const ProductGrid = ({product}) => {
               <div className="font-bold text-lg" dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(item?.price_html ?? "")}} />
               </div>
        
-            { item.type === "simple" ? <AddToCartBtn product={item}/> : ""}
+            <AddToCartBtn product={item}/>
             
             
 
