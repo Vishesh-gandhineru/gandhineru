@@ -11,12 +11,15 @@ async function getData() {
     throw new Error("Failed to fetch data");
   }
 
+
   return res.json();
 }
 
 const ShopPage = async () => {
 
   const ProductData = await getData();
+
+
 
   return (
     <div>
