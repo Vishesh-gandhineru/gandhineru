@@ -1,30 +1,40 @@
-"use client"
-import React, { useEffect, useState } from 'react'
+"use client";
 
-export const AppContext = React.createContext([{},()=>{}]);
+import React, { useEffect, useState } from "react";
+
+export const AppContext = React.createContext([{}, () => {}]);
 
 export const AppProvider = (props) => {
+  const [cart, setCart] = useState({
+    cartItems: [],
+    totalQtn: 0,
+    totalPrice: 0,
+  });
 
-    const [cart , setCart] = useState(null);
-
-    useEffect(()=>{
-
-        let cartData = localStorage.getItem('next-cart')
-        cartData = null !== cartData ? JSON.parse(cartData) : "" ;
+  useEffect(() => {
+    const loadCart = async () => {
+      if (typeof window !== "undefined") {
+        let cartData = localStorage.getItem("next-cart");
+        cartData =
+          cartData !== null
+            ? JSON.parse(cartData)
+            : { cartItems: [], totalQtn: 0, totalPrice: 0 };
         setCart(cartData);
+      }
+    };
 
-    },[])
+    loadCart();
+  }, []);
 
-    useEffect(()=>{
-        localStorage.setItem('next-cart', JSON.stringify(cart))
-    },[cart])
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("next-cart", JSON.stringify(cart));
+    }
+  }, [cart]);
 
   return (
-    
-    <AppContext.Provider value={[cart , setCart]}>
-        {props.children}
+    <AppContext.Provider value={[cart, setCart]}>
+      {props.children}
     </AppContext.Provider>
-    
-  )
-}
-
+  );
+};
