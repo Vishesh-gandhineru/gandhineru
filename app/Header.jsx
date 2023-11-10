@@ -28,6 +28,7 @@ const Header = () => {
           <span className="text-sm font-medium text-gray-900">({cartQtn})</span>
         </Link>
         <Link href="/checkout">Checkout</Link>
+        <Link href="/login">Login</Link>
       </ul>
     </nav>
   );

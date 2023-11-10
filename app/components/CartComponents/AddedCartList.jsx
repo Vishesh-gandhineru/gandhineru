@@ -57,7 +57,7 @@ const AddedCartList = () => {
               >
                 Clear Cart
               </button>
-              <button className="btn btn-success">Checkout</button>
+              <Link href='/checkout' className="btn btn-success">Process to Checkout</Link>
             </div>
           </div>
         </div>
