@@ -1,58 +1,73 @@
 "use client";
 
 import { AppContext } from "@/app/utils/context";
+import React, { useState } from "react";
 import Image from "next/image";
 import { useContext } from "react";
-
+import { UpdateCart, clearFullCart } from "@/app/utils/Cart/AddToCart";
+import CartItems from "./Cart-items";
+import Link from "next/link";
 
 const AddedCartList = () => {
-
-  const [cart , setCart] = useContext(AppContext) 
-
-  const cartItemData = cart.cartItems;
+  const [cart, setCart] = useContext(AppContext);
+  const cartItemData = cart?.cartItems ?? "";
 
   return (
-    <div className="overflow-x-auto">
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Product Image</th>
-            <th>Product</th>
-            <th>Qty</th>
-            <th>Price</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {cartItemData.map((items) => {
-            return (
-              <tr key={items.key}>
-                <td>
-                  <div className="relative w-[65%] h-[100px]">
-                    <Image
-                      className=" absolute object-cover mb-4"
-                      src={items.data.images[0].src}
-                      alt="Next.js Logo"
-                      fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      priority
+    <>
+      {cart ? (
+        <div className="flex justify-between gap-10">
+          <div className="overflow-x-auto w-[70%]">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Product Image</th>
+                  <th>Product</th>
+                  <th>Qty</th>
+                  <th>Price</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {cartItemData.map((items) => {
+                  return (
+                    <CartItems
+                      key={items.product_id}
+                      items={items}
+                      setCart={setCart}
+                      products={cartItemData}
                     />
-                  </div>
-                </td>
-                <td>
-                  <div className="font-bold">{items.data.name}</div>
-                </td>
-                <td>{items.quantity}</td>
-                <td>{items.line_total}</td>
-                <th>
-                  <button className="btn btn-ghost btn-xs">Update</button>
-                </th>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+          <div className="w-[30%] flex flex-col gap-10">
+            <div className="border p-5 border-black rounded flex flex-col gap-4">
+              <div className="text-2xl font-bold">
+                Total Quantity : {cart.totalQtn}
+              </div>
+              <div className="text-2xl font-bold">
+                Total Price : {cart.totalPrice}
+              </div>
+            </div>
+            <div className="flex justify-evenly">
+              <button
+                className="btn btn-error"
+                onClick={() => clearFullCart(setCart)}
+              >
+                Clear Cart
+              </button>
+              <button className="btn btn-success">Checkout</button>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="w-full h-[50vh] flex items-center justify-center flex-col gap-4">
+          <h2 className="text-xl">No item inside cart</h2>
+          <Link className="btn btn-neutral uppercase" href="/shop">Shop Now</Link>  
+        </div>
+      )}
+    </>
   );
 };
 

@@ -7,7 +7,7 @@ import { AppContext } from "./utils/context";
 const Header = () => {
   const [cart, setCart] = useContext(AppContext);
 
-  const cartQtn = cart.totalQtn;
+  const cartQtn = cart?.totalQtn ?? "0";
 
   return (
     <nav className="flex gap-10 items-center justify-between mb-8 p-6">

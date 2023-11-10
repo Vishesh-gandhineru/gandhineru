@@ -87,3 +87,44 @@ const calculateCartQtyAndPrice = (cartItems) => {
     return qtyAndPrice;
 
 }
+
+export const UpdateCart = (cartKey , quantity , setCart) => {
+
+    const addOrViewCartConfig = getAddOrViewCartConfig();
+
+    axios.put(`${CART_ENDPOINT}/${cartKey}` , {quantity : quantity} , addOrViewCartConfig )
+    .then(res => {
+        viewCart(setCart)
+    })
+    .catch(err => {
+        console.log("update cart error" , err)
+    })
+
+}
+
+
+export const DeleteCart = (cartKey , setCart) => {
+
+    const addOrViewCartConfig = getAddOrViewCartConfig();
+
+    axios.delete(`${CART_ENDPOINT}/${cartKey}` , addOrViewCartConfig )
+    .then(res => {
+        viewCart(setCart)
+    })
+    .catch(err => {
+        console.log("delete cart error" , err)
+    })
+
+}
+
+export const clearFullCart = (setCart) => {
+    const addOrViewCartConfig = getAddOrViewCartConfig();
+
+    axios.delete(`${CART_ENDPOINT}` , addOrViewCartConfig )
+    .then(res => {
+        viewCart(setCart)
+    })
+    .catch(err => {
+        console.log("clear full cart error" , err)
+    })
+}
