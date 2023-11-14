@@ -7,11 +7,11 @@ import cx from 'classnames';
 import Address from './user-address';
 import { AppContext } from '@/app/utils/context';
 import CheckboxField from './form-elements/checkbox-field';
-import {
-	handleBillingDifferentThanShipping,
-	handleCreateAccount, handleOtherPaymentMethodCheckout, handleStripeCheckout,
-	setStatesForCountry,
-} from '../../utils/checkout';
+// import {
+// 	handleBillingDifferentThanShipping,
+// 	handleCreateAccount, handleOtherPaymentMethodCheckout, handleStripeCheckout,
+// 	setStatesForCountry,
+// } from '../../utils/checkout';
 
 // Use this for testing purposes, so you dont have to fill the checkout form over an over again.
 // const defaultCustomerInfo = {

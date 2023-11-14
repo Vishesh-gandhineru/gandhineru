@@ -7,7 +7,7 @@ export const getAddOrViewCartConfig = () => {
     const config = {
         headers : {
             'X-Headless-CMS' : true,
-            "Content-Type" : "application/json",
+            
         },
     }
 

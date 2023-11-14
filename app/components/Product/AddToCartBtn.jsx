@@ -16,7 +16,7 @@ const AddToCartBtn = ({ product }) => {
     "btn btn-disabled mt-3": loading,
   });
 
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(Number(1));
 
   if (isEmpty(product)) {
     return null;
@@ -35,8 +35,10 @@ const AddToCartBtn = ({ product }) => {
         ""
       )}
 
-      {isAddedToCart ? (        
-          <Link className="btn btn-neutral w-1/2" href="/cart">View Cart</Link>       
+      {isAddedToCart ? (
+        <Link className="btn btn-neutral w-1/2" href="/cart">
+          View Cart
+        </Link>
       ) : (
         <button
           className="btn btn-neutral w-1/2"
@@ -46,7 +48,8 @@ const AddToCartBtn = ({ product }) => {
               quantity,
               setCart,
               setIsAddedToCart,
-              setLoading
+              setLoading,
+              setQuantity
             )
           }
           disabled={loading}

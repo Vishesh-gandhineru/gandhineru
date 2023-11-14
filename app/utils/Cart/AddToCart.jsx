@@ -5,7 +5,7 @@ import {getAddOrViewCartConfig} from "./api"
 import { storeSession , getSession } from "./session";
 
 
-export const AddToCart = (productId , qty , setCart , setIsAddedToCart , setLoading) => {
+export const AddToCart = (productId , qty , setCart , setIsAddedToCart , setLoading, setQuantity) => {
 
     const storedSession = getSession();
     const addOrViewCartConfig = getAddOrViewCartConfig();
@@ -30,6 +30,8 @@ export const AddToCart = (productId , qty , setCart , setIsAddedToCart , setLoad
         setLoading(false)
 
         viewCart(setCart);
+
+        console.log("res from post request", res)
     })
     .catch((err) => {
     console.log("error :" , err)
@@ -45,9 +47,10 @@ export const viewCart = (setCart) => {
 
     axios.get(CART_ENDPOINT , addOrViewCartConfig)
     .then (res => {
+        console.log( "get res ",res)
         const formattedCartData = getFormattedCartData(res.data || [])
         setCart (formattedCartData)
-        console.log("res :" , res)
+        console.log("res from viewCart function :" , res)
     })
     .catch( err => {
         console.log("error :" , err)
@@ -57,6 +60,7 @@ export const viewCart = (setCart) => {
 
 const getFormattedCartData = (cartData) => {
     if (!cartData.length){
+        console.log(cartData)
         return null;
     }
     const cartTotal = calculateCartQtyAndPrice(cartData || []);
@@ -80,8 +84,8 @@ const calculateCartQtyAndPrice = (cartItems) => {
     }
 
     cartItems.forEach((item)=>{
-        qtyAndPrice.totalQtn += item?.quantity ?? 0 ;
-        qtyAndPrice.totalPrice += item?.line_total ?? 0;
+        qtyAndPrice.totalQtn += Number(item?.quantity ?? 0) ;
+        qtyAndPrice.totalPrice += Number(item?.line_total ?? 0);
     })
 
     return qtyAndPrice;
