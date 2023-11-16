@@ -1,12 +1,10 @@
 import React from 'react'
 import { WOOCOMMERCE_COUNTRIES_ENDPOINT } from '../utils/constants/endpoints'
-import CheckoutForm from '../components/Checkout/CheckoutForm';
+import CheckoutForm from '../components/Checkout/CheckoutForm.jsx';
 
 
 async function getData () {
-  const res = await fetch(WOOCOMMERCE_COUNTRIES_ENDPOINT , {
-    revalidate: 1
-  });
+  const res = await fetch(WOOCOMMERCE_COUNTRIES_ENDPOINT);
 
   if (!res.ok) {
     throw new Error("Failed to fetch Woocommerce Counties")
@@ -23,7 +21,6 @@ const CheckoutPage = async () => {
         <h1>
         Checkout Page
         </h1>
-
         <CheckoutForm countriesData={countriesData} />
         </div>
   )

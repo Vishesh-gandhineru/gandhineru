@@ -1,4 +1,3 @@
-import { NextResponse } from "next/server";
 
 const WooCommerceRestApi = require("@woocommerce/woocommerce-rest-api").default;
 
