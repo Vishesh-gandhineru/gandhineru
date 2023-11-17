@@ -1,9 +1,10 @@
 import React from 'react'
-import { WOOCOMMERCE_COUNTRIES_ENDPOINT } from '../utils/constants/endpoints'
+import { GET_PAYMENTGATEWAY_ENDPOINT, WOOCOMMERCE_COUNTRIES_ENDPOINT } from '../utils/constants/endpoints'
 import CheckoutForm from '../components/Checkout/CheckoutForm.jsx';
+import axios from 'axios';
 
 
-async function getData () {
+async function countryData () {
   const res = await fetch(WOOCOMMERCE_COUNTRIES_ENDPOINT);
 
   if (!res.ok) {
@@ -13,15 +14,25 @@ async function getData () {
   return res.json();
 }
 
-const CheckoutPage = async () => {
+async function paymentGateway () {
+  const res = await fetch (GET_PAYMENTGATEWAY_ENDPOINT);
 
-  const countriesData = await getData();
+  if (!res.ok) {
+    throw new Error("Failed to fetch Woocommerce payment gateway")
+  }
+
+  return res.json();
+}
+
+const CheckoutPage = async () => {
+  const countriesData = await countryData();
+  const Paymentgateway = await paymentGateway();
   return (
     <div>
         <h1>
         Checkout Page
         </h1>
-        <CheckoutForm countriesData={countriesData} />
+        <CheckoutForm countriesData={countriesData} Paymentgateway={Paymentgateway} />
         </div>
   )
 }

@@ -49,6 +49,10 @@ const BillingForm = ({ countriesData, setInput }) => {
         ...prev.billing,
         [event.target.name]: event.target.value,
       },
+      shipping: {
+        ...prev.shipping,
+        [event.target.name]: event.target.value,
+      },
     }));
   };
 
@@ -106,6 +110,7 @@ const BillingForm = ({ countriesData, setInput }) => {
             id="houseNumber"
             className="input input-bordered w-full"
             placeholder="House number and street name"
+            onChange={handleCountryChange}
           />
           <input
             type="text"
@@ -113,6 +118,7 @@ const BillingForm = ({ countriesData, setInput }) => {
             id="ApartmentNumber"
             className="input input-bordered w-full"
             placeholder="Apartment, suite , unit ,etc"
+            onChange={handleCountryChange}
           />
         </label>
 
@@ -124,12 +130,14 @@ const BillingForm = ({ countriesData, setInput }) => {
             id="townAndCity"
             className="input input-bordered w-full"
             placeholder="Town / City"
+            onChange={handleCountryChange}
           />
         </label>
       </div>
 
       <div>
         {isStateReady && (
+          <div>
           <label htmlFor="states">
             State
             <select
@@ -147,6 +155,19 @@ const BillingForm = ({ countriesData, setInput }) => {
               })}
             </select>
           </label>
+          <label htmlFor="postcode">
+          Postcode / ZIP
+          <input
+            type="text"
+            name="postcode"
+            id="postcode"
+            className="input input-bordered w-full"
+            placeholder="postcode"
+            onChange={handleBillingChange}
+          />
+        </label>
+          </div>
+          
         )}
       </div>
 

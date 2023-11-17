@@ -1,9 +1,10 @@
 "use client"
-
 import React, { useContext, useState } from 'react'
 import BillingForm from './Billing-form';
 import { AppContext } from '@/app/utils/context';
 import CheckoutOrder from './CheckoutOrder';
+import { isEmpty } from 'lodash';
+import Link from 'next/link';
 
 
 // Use this for testing purposes, so you dont have to fill the checkout form over an over again.
@@ -41,15 +42,9 @@ const defaultCustomerInfo = {
 
 
 
-const handleSubmit = (event) => {
-    event.preventDefault();
 
-    console.log("form submitted")
-
-}
-
-const CheckoutForm = ({countriesData}) => {
-
+const CheckoutForm = ({countriesData , Paymentgateway}) => {
+    
     const initialState = {
         billing: {
             ...defaultCustomerInfo,
@@ -60,16 +55,19 @@ const CheckoutForm = ({countriesData}) => {
         createAccount: false,
         orderNotes: '',
         billingDifferentThanShipping: false,
-        paymentMethod: 'cod',
+        payment_method: 'cod',
     };
 
     const [cart , setCart] = useContext(AppContext);
     const [input , setInput] = useState(initialState);
-
-    console.log(input)
-  return (
+    
+    const handleSubmit = (event) => {
+        event.preventDefault();
+       }
+    
+    return (
     <main>
-        <div className='flex justify-between'>
+        {cart ? ( <div className='flex justify-between'>
         <form onSubmit={handleSubmit} className='w-[50%]'>
             <div>
             <h2>Billing Details</h2>
@@ -77,9 +75,12 @@ const CheckoutForm = ({countriesData}) => {
             </div>
         </form>
         <div className='w-[40%]'>
-            <CheckoutOrder setCart={setCart} cart={cart} />
+            <CheckoutOrder setCart={setCart} cart={cart} Paymentgateway={Paymentgateway} input={input}/>
         </div>
-        </div>
+        </div>): (<div className="w-full h-[50vh] flex items-center justify-center flex-col gap-4">
+          <h2 className="text-xl">No item inside cart</h2>
+          <Link className="btn btn-neutral uppercase" href="/shop">Shop Now</Link>  
+        </div>)}
     </main>
   )
 }
