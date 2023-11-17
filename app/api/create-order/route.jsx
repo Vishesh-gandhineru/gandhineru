@@ -16,21 +16,20 @@ let response = {
 	total: "",
 	currency: "",
 	error: "",
-	payment_url : "",
+	paymentUrl : "",
   };
 
 	await api.post("orders" , request)
 
 	.then ((result)=> {
 
-		 console.log(result)
-		if (result.error) {
+		 if (result.error) {
 			response.error = result.error;
 		  }
 		  response.orderId = result.data.order_key ?? "";
 		  response.total = result.data.total ?? "";
 		  response.currency = result.data.currency ?? "";
-		  response.payment_url = result.data.payment_url ?? "";
+		  response.paymentUrl = result.data.payment_url ?? "";
 	})
 
  .catch ((error=>{

@@ -1,10 +1,15 @@
 
 import { createCheckoutData, createOrder } from '@/app/utils/checkout';
-import { POST_ORDER_ENDPOINT } from '@/app/utils/constants/endpoints';
-import axios from 'axios';
-import {parse, stringify, toJSON, fromJSON} from 'flatted';
+import { handelPaymentCheckout } from '@/app/utils/checkout/order';
+import { useState } from 'react';
+
 
 const CheckoutOrder = ({ cart, setCart, Paymentgateway, input }) => {
+
+
+  const [isProcessing , setIsProcessing] = useState(false);
+  const [paymentUrl , setPaymentUrl] = useState("");
+
   const cartProduct = cart?.cartItems ?? "";
 
   const cartItem = cartProduct.map((item) => ({
@@ -12,14 +17,25 @@ const CheckoutOrder = ({ cart, setCart, Paymentgateway, input }) => {
     quantity: item.quantity,
   }));
 
+ 
+
   
 
   const handelCreateOrder = async () => {
-    const orderData = createCheckoutData(input , cart , Paymentgateway);
-    const customerCreateOrder = await createOrder(orderData);
+    
+    // const customerCreateOrder = await createOrder(orderData , setIsProcessing);
+    const createOrderData = await handelPaymentCheckout(setIsProcessing , input , cart , Paymentgateway);
+    
+    
+    if ( createOrderData.paymentUrl ) {
+      setPaymentUrl(createOrderData.paymentUrl)
+      window.location.href = createOrderData.paymentUrl;
+		}
 
-    return customerCreateOrder;
   }
+
+  console.log(paymentUrl)
+  console.log(isProcessing)
 
 
   return (
@@ -59,7 +75,7 @@ const CheckoutOrder = ({ cart, setCart, Paymentgateway, input }) => {
       </div>
 
       <div className="bordered border-black">
-        <div>{Paymentgateway.title}</div>
+        <div>{Paymentgateway.title} -- razorpay</div>
         <button className="btn btn-primary" onClick={handelCreateOrder}>
           place order
         </button>

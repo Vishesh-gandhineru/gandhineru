@@ -9,7 +9,6 @@ export const line_items = (cart) => {
 
 export const createCheckoutData = (input, cart, Paymentgateway) => {
     const billing = input.billing;
-    const shipping = input.shipping
     return {
         billing: {
             first_name: billing.firstName,
@@ -48,12 +47,16 @@ export const createCheckoutData = (input, cart, Paymentgateway) => {
 
 
 export const createOrder = async (orderData) => {
+    
+  
     let response = {
 		orderId: null,
 		total: '',
 		currency: '',
 		error: '',
+        paymentUrl:''
 	};
+
 		
 	try {
 		const request = await fetch( '/api/create-order', {
@@ -65,18 +68,25 @@ export const createOrder = async (orderData) => {
 		} );
 		
 		const result = await request.json();
-		if ( result.error ) {
+
+        console.log(result)
+       		if ( result.error ) {
 			response.error = result.error;
 		}
+
 		response.orderId = result?.orderId ?? '';
-		response.total = result.total ?? '';
-		response.currency = result.currency ?? '';
-		response.paymentUrl = result.paymentUrl ?? '';
+		response.total = result?.total ?? '';
+		response.currency = result?.currency ?? '';
+		response.paymentUrl = result?.paymentUrl ?? '';
+        
+        
 		
 	} catch ( error ) {
 		// @TODO to be handled later.
 		console.warn( 'create order error', error?.message );
 	}
+
+
 	
 	return response;
 

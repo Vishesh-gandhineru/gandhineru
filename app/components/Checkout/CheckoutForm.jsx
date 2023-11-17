@@ -8,35 +8,35 @@ import Link from 'next/link';
 
 
 // Use this for testing purposes, so you dont have to fill the checkout form over an over again.
-// const defaultCustomerInfo = {
-// 	firstName: 'Imran',
-// 	lastName: 'Sayed',
-// 	address1: '123 Abc farm',
-// 	address2: 'Hill Road',
-// 	city: 'Mumbai',
-// 	country: 'IN',
-// 	state: 'Maharastra',
-// 	postcode: '221029',
-// 	email: 'codeytek.academy@gmail.com',
-// 	phone: '9883778278',
-// 	company: 'The Company',
-// 	errors: null,
-// };
-
 const defaultCustomerInfo = {
-	firstName: '',
-	lastName: '',
-	address1: '',
-	address2: '',
-	city: '',
-	country: '',
-	state: '',
-	postcode: '',
-	email: '',
-	phone: '',
-	company: '',
-	errors: null
-}
+	firstName: 'vishesh',
+	lastName: 'jhadi',
+	address1: '123 Abc farm',
+	address2: 'Hill Road',
+	city: 'Mumbai',
+	country: 'IN',
+	state: 'Maharastra',
+	postcode: '221029',
+	email: 'codeytek.academy@gmail.com',
+	phone: '9883778278',
+	company: 'The Company',
+	errors: null,
+};
+
+// const defaultCustomerInfo = {
+// 	firstName: '',
+// 	lastName: '',
+// 	address1: '',
+// 	address2: '',
+// 	city: '',
+// 	country: '',
+// 	state: '',
+// 	postcode: '',
+// 	email: '',
+// 	phone: '',
+// 	company: '',
+// 	errors: null
+// }
 
 
 

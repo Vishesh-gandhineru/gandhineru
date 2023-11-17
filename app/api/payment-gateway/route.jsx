@@ -20,10 +20,7 @@ export async function GET(req, res){
  
       try {
         const {data} = await api.get(
-          "payment_gateways/cod" , {
-            revalidate:1
-          }
-        );
+          "payment_gateways");
   
         responseData.success = true;
         responseData.products = data;
