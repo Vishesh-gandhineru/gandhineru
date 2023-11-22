@@ -16,6 +16,9 @@ const ProductGrid = ({product}) => {
         return (
           <div key={item.id} className="border p-4 flex flex-col justify-between">
           
+
+              <Link href={`shop/${item.slug}`}>
+
               <div className="relative w-full h-[250px] bg-slate-50 mb-3">
               <Image
                 className=" absolute object-cover mb-4"
@@ -31,6 +34,8 @@ const ProductGrid = ({product}) => {
               
               <div className="font-bold text-lg" dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(item?.price_html ?? "")}} />
               </div>
+
+              </Link>
        
             <AddToCartBtn product={item}/>
             

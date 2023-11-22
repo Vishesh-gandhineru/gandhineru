@@ -16,22 +16,19 @@ export async function GET(req, res){
         success: false,
         products: []
       }
-  
-      const { perPage } = req?.query ?? {};
-  
+      
+      const searchParams = req.nextUrl.searchParams
+      const perPage  = searchParams.get('perPage') ?? "";     
       try {
         const {data} = await api.get(
           'products',
           {
-            per_page: perPage || 10
+            per_page: perPage || 50
           }
         );
   
         responseData.success = true;
-        responseData.products = data;
-  
-        res.json( responseData );
-  
+        responseData.products = data;  
       } catch ( error ) {
         responseData.error = error.message;
        
